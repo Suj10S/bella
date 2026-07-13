@@ -1,423 +1,1348 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bella Cafe · Reviews & Location</title>
-  <!-- Google Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f9f7f0;
-      color: #1e2b1f;
-      line-height: 1.5;
-    }
-    .pattern-overlay {
-      position: fixed; inset: 0; pointer-events: none; z-index: 9999;
-      opacity: 0.04;
-      background-image: repeating-linear-gradient(45deg, #8aa77b 0px, #8aa77b 2px, transparent 2px, transparent 14px),
-                        repeating-linear-gradient(-45deg, #d4b87a 0px, #d4b87a 2px, transparent 2px, transparent 14px);
-      background-size: 32px 32px;
-      mix-blend-mode: multiply;
-    }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bella Cafe · Reviews & Location</title>
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ── reset & base ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9f7f0;
+            color: #1e2b1f;
+            line-height: 1.5;
+        }
+        .pattern-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image:
+                repeating-linear-gradient(45deg, #8aa77b 0px, #8aa77b 2px, transparent 2px, transparent 14px),
+                repeating-linear-gradient(-45deg, #d4b87a 0px, #d4b87a 2px, transparent 2px, transparent 14px);
+            background-size: 32px 32px;
+            mix-blend-mode: multiply;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
-    /* NAVBAR (unchanged) */
-    .navbar {
-      background: #1e3a2b; color: #f5f2e0; padding: 12px 0;
-      border-bottom: 3px solid #d4b87a; position: sticky; top: 0; z-index: 100;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    }
-    .navbar .container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
-    .logo-block { display: flex; align-items: center; gap: 12px; }
-    .logo-block img { height: 44px; width: auto; border-radius: 10px; border: 2px solid #d4b87a; }
-    .logo-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #f5f2e0; }
-    .logo-text span { color: #e6d5a8; font-weight: 400; }
-    .nav-links { display: flex; gap: 20px; font-weight: 500; align-items: center; flex-wrap: wrap; }
-    .nav-links a { color: #f5f2e0; text-decoration: none; font-size: 0.9rem; transition: 0.2s; border-bottom: 2px solid transparent; padding-bottom: 4px; display: flex; align-items: center; gap: 6px; }
-    .nav-links a:hover { border-bottom-color: #d4b87a; color: #f5e6c6; }
-    .nav-links a i { color: #d4b87a; }
-    .lang-toggle { display: flex; gap: 4px; background: rgba(255,255,255,0.08); border-radius: 40px; padding: 4px 6px; border: 1px solid #d4b87a; }
-    .lang-btn { background: transparent; border: none; color: #b8b09e; font-weight: 600; padding: 4px 12px; border-radius: 30px; cursor: pointer; font-size: 0.8rem; transition: 0.2s; }
-    .lang-btn.active { background: #d4b87a; color: #1e3a2b; }
-    .lang-btn:hover:not(.active) { color: #f5f2e0; }
-    .hamburger { display: none; font-size: 1.6rem; background: none; border: none; color: #f5f2e0; cursor: pointer; }
+        /* ── navbar ── */
+        .navbar {
+            background: #1e3a2b;
+            color: #f5f2e0;
+            padding: 12px 0;
+            border-bottom: 3px solid #d4b87a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .logo-block {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-block img {
+            height: 44px;
+            width: 44px;
+            border-radius: 10px;
+            border: 2px solid #d4b87a;
+            object-fit: cover;
+        }
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f5f2e0;
+        }
+        .logo-text span {
+            color: #e6d5a8;
+            font-weight: 400;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            font-weight: 500;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #f5f2e0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-links a:hover {
+            border-bottom-color: #d4b87a;
+            color: #f5e6c6;
+        }
+        .nav-links a i {
+            color: #d4b87a;
+        }
+        .lang-toggle {
+            display: flex;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 40px;
+            padding: 4px 6px;
+            border: 1px solid #d4b87a;
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: #b8b09e;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.2s;
+        }
+        .lang-btn.active {
+            background: #d4b87a;
+            color: #1e3a2b;
+        }
+        .lang-btn:hover:not(.active) {
+            color: #f5f2e0;
+        }
+        .hamburger {
+            display: none;
+            font-size: 1.6rem;
+            background: none;
+            border: none;
+            color: #f5f2e0;
+            cursor: pointer;
+        }
 
-    /* HERO (unchanged) */
-    .hero { padding: 32px 0 28px; background: linear-gradient(145deg, #eaf3e6 0%, #f9f7f0 80%); border-bottom: 2px solid #d4b87a; }
-    .hero-grid { display: flex; flex-wrap: wrap; gap: 28px; align-items: center; }
-    .hero-content { flex: 1 1 280px; }
-    .hero-content h1 { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: #1e3a2b; }
-    .hero-content h1 i { color: #b8944c; font-style: normal; }
-    .hero-content .tagline { font-size: 1.1rem; color: #3e5a3f; margin-top: 10px; border-left: 5px solid #d4b87a; padding-left: 18px; }
-    .hero-stats { display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
-    .stat-item { background: white; padding: 6px 18px 6px 14px; border-radius: 40px; border: 1px solid #d4b87a; font-weight: 500; font-size: 0.9rem; }
-    .stat-item i { color: #b8944c; margin-right: 8px; }
-    .hero-slider { flex: 1 1 360px; border-radius: 28px; overflow: hidden; border: 3px solid #d4b87a; background: #eae3d6; min-height: 260px; }
-    .slider-container { position: relative; width: 100%; height: 100%; aspect-ratio: 4/3; }
-    .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); height: 100%; }
-    .slider-slide { min-width: 100%; height: 100%; object-fit: cover; display: block; }
-    .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(30,58,43,0.6); backdrop-filter: blur(4px); color: #f5f2e0; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1rem; cursor: pointer; z-index: 5; transition: 0.2s; display: flex; align-items: center; justify-content: center; }
-    .slider-btn:hover { background: #1e3a2b; color: #d4b87a; }
-    .slider-btn.prev { left: 10px; }
-    .slider-btn.next { right: 10px; }
-    .slider-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; }
-    .slider-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.2); cursor: pointer; transition: 0.2s; }
-    .slider-dot.active { background: #d4b87a; border-color: #d4b87a; transform: scale(1.2); }
+        /* ── hero ── */
+        .hero {
+            padding: 32px 0 28px;
+            background: linear-gradient(145deg, #eaf3e6 0%, #f9f7f0 80%);
+            border-bottom: 2px solid #d4b87a;
+        }
+        .hero-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            align-items: center;
+        }
+        .hero-content {
+            flex: 1 1 280px;
+        }
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1e3a2b;
+        }
+        .hero-content h1 i {
+            color: #b8944c;
+            font-style: normal;
+        }
+        .hero-content .tagline {
+            font-size: 1.1rem;
+            color: #3e5a3f;
+            margin-top: 10px;
+            border-left: 5px solid #d4b87a;
+            padding-left: 18px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            background: white;
+            padding: 6px 18px 6px 14px;
+            border-radius: 40px;
+            border: 1px solid #d4b87a;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .stat-item i {
+            color: #b8944c;
+            margin-right: 8px;
+        }
+        .hero-slider {
+            flex: 1 1 360px;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 3px solid #d4b87a;
+            background: #eae3d6;
+            min-height: 260px;
+        }
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 4/3;
+        }
+        .slider-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            height: 100%;
+        }
+        .slider-slide {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(30, 58, 43, 0.6);
+            backdrop-filter: blur(4px);
+            color: #f5f2e0;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            z-index: 5;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slider-btn:hover {
+            background: #1e3a2b;
+            color: #d4b87a;
+        }
+        .slider-btn.prev {
+            left: 10px;
+        }
+        .slider-btn.next {
+            right: 10px;
+        }
+        .slider-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 5;
+        }
+        .slider-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .slider-dot.active {
+            background: #d4b87a;
+            border-color: #d4b87a;
+            transform: scale(1.2);
+        }
 
-    /* SECTION TITLES */
-    .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #1e3a2b; margin-bottom: 16px; display: flex; align-items: center; gap: 14px; }
-    .section-title i { color: #b8944c; font-size: 1.6rem; }
-    .section-sub { color: #3e5a3f; margin-bottom: 24px; font-size: 1rem; max-width: 700px; }
+        /* ── section titles ── */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e3a2b;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .section-title i {
+            color: #b8944c;
+            font-size: 1.6rem;
+        }
+        .section-sub {
+            color: #3e5a3f;
+            margin-bottom: 24px;
+            font-size: 1rem;
+            max-width: 700px;
+        }
 
-    /* REVIEW SLIDER */
-    .review-slider-wrap { background: #f5f2e0; border-radius: 32px; border: 2px solid #d4b87a; padding: 28px 20px 20px; margin: 32px 0; position: relative; }
-    .review-slider-container { overflow: hidden; border-radius: 20px; background: #fcf9f2; padding: 8px 0; }
-    .review-track { display: flex; transition: transform 0.5s ease; will-change: transform; gap: 0; }
-    .review-card { min-width: 33.333%; padding: 16px 20px; background: white; border-radius: 16px; border: 1px solid #d4b87a; margin: 0 10px; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
-    .review-card .stars { color: #f5b342; font-size: 1rem; margin-bottom: 6px; }
-    .review-card .review-text { font-size: 0.92rem; color: #1e2b1f; line-height: 1.5; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
-    .review-card .reviewer { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
-    .review-card .reviewer .avatar { width: 36px; height: 36px; border-radius: 50%; background: #d4b87a; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #1e3a2b; font-size: 0.8rem; flex-shrink: 0; }
-    .review-card .reviewer .name { font-weight: 600; font-size: 0.85rem; }
-    .review-card .reviewer .date { font-size: 0.7rem; color: #6d7f5e; }
-    .review-slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(30,58,43,0.7); backdrop-filter: blur(4px); color: #f5f2e0; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1rem; cursor: pointer; z-index: 5; transition: 0.2s; display: flex; align-items: center; justify-content: center; }
-    .review-slider-btn:hover { background: #1e3a2b; color: #d4b87a; }
-    .review-slider-btn.prev { left: 6px; }
-    .review-slider-btn.next { right: 6px; }
-    .review-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
-    .review-dot { width: 8px; height: 8px; border-radius: 50%; background: #c7b694; cursor: pointer; transition: 0.2s; }
-    .review-dot.active { background: #b8944c; transform: scale(1.3); }
+        /* ── review slider ── */
+        .review-slider-wrap {
+            background: #f5f2e0;
+            border-radius: 32px;
+            border: 2px solid #d4b87a;
+            padding: 28px 20px 20px;
+            margin: 32px 0;
+            position: relative;
+        }
+        .review-slider-container {
+            overflow: hidden;
+            border-radius: 20px;
+            background: #fcf9f2;
+            padding: 8px 0;
+        }
+        .review-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            will-change: transform;
+            gap: 0;
+        }
+        .review-card {
+            min-width: 33.333%;
+            padding: 16px 20px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #d4b87a;
+            margin: 0 10px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+        .review-card .stars {
+            color: #f5b342;
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+        .review-card .review-text {
+            font-size: 0.92rem;
+            color: #1e2b1f;
+            line-height: 1.5;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .review-card .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 4px;
+        }
+        .review-card .reviewer .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #d4b87a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #1e3a2b;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        .review-card .reviewer .name {
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .review-card .reviewer .date {
+            font-size: 0.7rem;
+            color: #6d7f5e;
+        }
+        .review-slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(30, 58, 43, 0.7);
+            backdrop-filter: blur(4px);
+            color: #f5f2e0;
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            z-index: 5;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .review-slider-btn:hover {
+            background: #1e3a2b;
+            color: #d4b87a;
+        }
+        .review-slider-btn.prev {
+            left: 6px;
+        }
+        .review-slider-btn.next {
+            right: 6px;
+        }
+        .review-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        .review-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #c7b694;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .review-dot.active {
+            background: #b8944c;
+            transform: scale(1.3);
+        }
 
-    /* MAP + DIRECTION + STREET VIEW */
-    .map-container { border-radius: 28px; overflow: hidden; border: 3px solid #d4b87a; margin: 24px 0; height: 380px; }
-    .map-container iframe { width: 100%; height: 100%; border: 0; }
-    .action-buttons { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin: 16px 0 24px; }
-    .btn { display: inline-block; background: #1e3a2b; color: #f5f2e0; padding: 12px 28px; border-radius: 60px; text-decoration: none; font-weight: 600; transition: 0.2s; border: 2px solid #1e3a2b; font-size: 0.95rem; cursor: pointer; }
-    .btn:hover { background: #2b523b; transform: scale(1.02); box-shadow: 0 6px 14px rgba(30,59,43,0.2); }
-    .btn-outline { background: transparent; color: #1e3a2b; border: 2px solid #1e3a2b; }
-    .btn-outline:hover { background: #1e3a2b; color: #f5f2e0; }
-    .btn-gold { background: #b8944c; color: white; border-color: #b8944c; }
-    .btn-gold:hover { background: #a37d3d; border-color: #a37d3d; }
+        /* ── gallery ── */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 24px 0 32px;
+        }
+        .gallery-item {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 3px solid #d4b87a;
+            aspect-ratio: 1/1;
+            background: #eae3d6;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            position: relative;
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-item .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(30, 58, 43, 0.5) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: flex-end;
+            padding: 14px;
+            color: #f5f2e0;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        .gallery-item .gallery-overlay i {
+            margin-right: 8px;
+            color: #d4b87a;
+        }
 
-    /* BOOK NOW BUTTON (FLOATING) */
-    .book-now-float {
-      position: fixed; bottom: 100px; left: 24px; z-index: 9998;
-      background: #b8944c; color: white; border: none;
-      border-radius: 60px; padding: 16px 28px;
-      font-weight: 700; font-size: 1.1rem; font-family: 'Inter', sans-serif;
-      cursor: pointer; box-shadow: 0 8px 28px rgba(184,148,76,0.35);
-      transition: 0.25s ease; display: flex; align-items: center; gap: 12px;
-    }
-    .book-now-float:hover { transform: scale(1.05); background: #a37d3d; box-shadow: 0 12px 32px rgba(184,148,76,0.45); }
-    .book-now-float i { font-size: 1.4rem; }
+        /* ── menu ── */
+        .menu-section {
+            background: #f5f2e0;
+            border-radius: 32px;
+            border: 2px solid #d4b87a;
+            padding: 28px 24px 24px;
+            margin: 24px 0 32px;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 12px;
+        }
+        .menu-category {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            border: 2px solid #d4b87a;
+            transition: transform 0.2s;
+        }
+        .menu-category:hover {
+            transform: translateY(-4px);
+        }
+        .menu-category h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #1e3a2b;
+            border-bottom: 2px solid #e6d5a8;
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .menu-category h3 i {
+            color: #b8944c;
+            font-size: 1.2rem;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px dashed #eee;
+            font-size: 0.92rem;
+        }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        .menu-item .name {
+            font-weight: 500;
+        }
+        .menu-item .price {
+            color: #b8944c;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .menu-item .desc {
+            font-size: 0.75rem;
+            color: #6d7f5e;
+            display: block;
+            font-weight: 400;
+        }
 
-    /* FLOATING WHATSAPP & PHONE (right) */
-    .float-buttons { position: fixed; bottom: 24px; right: 24px; z-index: 9998; display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
-    .float-btn { display: flex; align-items: center; gap: 10px; padding: 12px 18px 12px 16px; border-radius: 60px; font-weight: 600; font-size: 0.9rem; text-decoration: none; box-shadow: 0 8px 24px rgba(0,0,0,0.12); transition: 0.25s ease; border: 2px solid transparent; background: white; color: #1e3a2b; }
-    .float-btn i { font-size: 1.4rem; flex-shrink: 0; }
-    .float-btn.whatsapp { background: #25d366; color: white; border-color: #1ebe5c; }
-    .float-btn.whatsapp:hover { background: #20b85a; transform: scale(1.04); }
-    .float-btn.phone { background: #b8944c; color: white; border-color: #a37d3d; }
-    .float-btn.phone:hover { background: #a37d3d; transform: scale(1.04); }
+        /* ── facilities ── */
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 18px;
+            margin: 20px 0 24px;
+        }
+        .facility-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px 16px 20px;
+            text-align: center;
+            border: 2px solid #d4b87a;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .facility-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+        .facility-card i {
+            font-size: 2.2rem;
+            color: #b8944c;
+            margin-bottom: 10px;
+        }
+        .facility-card h4 {
+            font-size: 1rem;
+            color: #1e3a2b;
+            margin-bottom: 4px;
+        }
+        .facility-card p {
+            font-size: 0.8rem;
+            color: #6d7f5e;
+        }
 
-    .footer { background: #1e3a2b; color: #e6d5a8; padding: 32px 0 16px; margin-top: 40px; border-top: 4px solid #d4b87a; }
-    .footer .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; }
-    .footer-copy { font-size: 0.85rem; opacity: 0.8; }
+        /* ── map ── */
+        .map-container {
+            border-radius: 28px;
+            overflow: hidden;
+            border: 3px solid #d4b87a;
+            margin: 24px 0;
+            height: 380px;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            margin: 16px 0 24px;
+        }
+        .btn {
+            display: inline-block;
+            background: #1e3a2b;
+            color: #f5f2e0;
+            padding: 12px 28px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+            border: 2px solid #1e3a2b;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #2b523b;
+            transform: scale(1.02);
+            box-shadow: 0 6px 14px rgba(30, 59, 43, 0.2);
+        }
+        .btn-outline {
+            background: transparent;
+            color: #1e3a2b;
+            border: 2px solid #1e3a2b;
+        }
+        .btn-outline:hover {
+            background: #1e3a2b;
+            color: #f5f2e0;
+        }
+        .btn-gold {
+            background: #b8944c;
+            color: white;
+            border-color: #b8944c;
+        }
+        .btn-gold:hover {
+            background: #a37d3d;
+            border-color: #a37d3d;
+        }
 
-    @media (max-width: 768px) {
-      .nav-links { display: none; flex-direction: column; width: 100%; padding-top: 14px; gap: 12px; }
-      .nav-links.open { display: flex; }
-      .hamburger { display: block; }
-      .review-card { min-width: 100%; margin: 0 4px; }
-      .review-slider-btn { width: 30px; height: 30px; font-size: 0.8rem; }
-      .book-now-float { bottom: 90px; left: 16px; padding: 12px 18px; font-size: 0.9rem; }
-      .book-now-float span { display: none; }
-      .book-now-float i { font-size: 1.4rem; margin: 0; }
-      .float-btn .label { display: none; }
-      .float-btn { padding: 12px 14px; border-radius: 50px; }
-      .float-btn i { font-size: 1.4rem; margin: 0; }
-    }
-    @media (max-width: 480px) {
-      .book-now-float { bottom: 80px; left: 12px; padding: 10px 14px; }
-      .float-buttons { bottom: 16px; right: 16px; gap: 10px; }
-      .float-btn { padding: 10px 12px; }
-      .float-btn i { font-size: 1.2rem; }
-    }
-    .flex-wrap { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-    .mt-2 { margin-top: 16px; }
-    .i18n { transition: 0.15s; }
-  </style>
+        /* ── floating buttons ── */
+        .book-now-float {
+            position: fixed;
+            bottom: 100px;
+            left: 24px;
+            z-index: 9998;
+            background: #b8944c;
+            color: white;
+            border: none;
+            border-radius: 60px;
+            padding: 16px 28px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            box-shadow: 0 8px 28px rgba(184, 148, 76, 0.35);
+            transition: 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .book-now-float:hover {
+            transform: scale(1.05);
+            background: #a37d3d;
+            box-shadow: 0 12px 32px rgba(184, 148, 76, 0.45);
+        }
+        .book-now-float i {
+            font-size: 1.4rem;
+        }
+        .float-buttons {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9998;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-end;
+        }
+        .float-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px 12px 16px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transition: 0.25s ease;
+            border: 2px solid transparent;
+            background: white;
+            color: #1e3a2b;
+        }
+        .float-btn i {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .float-btn.whatsapp {
+            background: #25d366;
+            color: white;
+            border-color: #1ebe5c;
+        }
+        .float-btn.whatsapp:hover {
+            background: #20b85a;
+            transform: scale(1.04);
+        }
+        .float-btn.phone {
+            background: #b8944c;
+            color: white;
+            border-color: #a37d3d;
+        }
+        .float-btn.phone:hover {
+            background: #a37d3d;
+            transform: scale(1.04);
+        }
+
+        /* ── footer ── */
+        .footer {
+            background: #1e3a2b;
+            color: #e6d5a8;
+            padding: 32px 0 16px;
+            margin-top: 40px;
+            border-top: 4px solid #d4b87a;
+        }
+        .footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .footer-copy {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* ── responsive ── */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding-top: 14px;
+                gap: 12px;
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .hamburger {
+                display: block;
+            }
+            .review-card {
+                min-width: 100%;
+                margin: 0 4px;
+            }
+            .review-slider-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+            .book-now-float {
+                bottom: 90px;
+                left: 16px;
+                padding: 12px 18px;
+                font-size: 0.9rem;
+            }
+            .book-now-float span {
+                display: none;
+            }
+            .book-now-float i {
+                font-size: 1.4rem;
+                margin: 0;
+            }
+            .float-btn .label {
+                display: none;
+            }
+            .float-btn {
+                padding: 12px 14px;
+                border-radius: 50px;
+            }
+            .float-btn i {
+                font-size: 1.4rem;
+                margin: 0;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+            .menu-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .book-now-float {
+                bottom: 80px;
+                left: 12px;
+                padding: 10px 14px;
+            }
+            .float-buttons {
+                bottom: 16px;
+                right: 16px;
+                gap: 10px;
+            }
+            .float-btn {
+                padding: 10px 12px;
+            }
+            .float-btn i {
+                font-size: 1.2rem;
+            }
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+        }
+        .flex-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+        }
+        .mt-2 {
+            margin-top: 16px;
+        }
+        .i18n {
+            transition: 0.15s;
+        }
+
+        /* ── lightbox (gallery) ── */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 40px;
+        }
+        .lightbox.open {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 20px;
+            border: 4px solid #d4b87a;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+        }
+        .lightbox .close-lightbox {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            font-size: 2.8rem;
+            color: #f5f2e0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .lightbox .close-lightbox:hover {
+            color: #d4b87a;
+            transform: rotate(90deg);
+        }
+        .lightbox .lightbox-caption {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #f5f2e0;
+            font-weight: 500;
+            background: rgba(30, 58, 43, 0.7);
+            padding: 8px 24px;
+            border-radius: 40px;
+            backdrop-filter: blur(6px);
+            font-size: 0.95rem;
+            border: 1px solid rgba(212, 184, 122, 0.3);
+        }
+
+        /* About Us specific */
+        .about-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+        }
+        .about-grid .about-text {
+            flex: 1 1 300px;
+        }
+        .about-grid .about-text p {
+            font-size: 1.05rem;
+            color: #3e5a3f;
+            line-height: 1.7;
+        }
+        .about-grid .about-slider-wrapper {
+            flex: 1 1 300px;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 3px solid #d4b87a;
+            background: #eae3d6;
+            min-height: 200px;
+        }
+        .about-grid .about-slider-wrapper .slider-container {
+            aspect-ratio: 4/3;
+        }
+    </style>
 </head>
 <body>
 
-<div class="pattern-overlay"></div>
+    <div class="pattern-overlay"></div>
 
-<!-- NAVBAR (unchanged) -->
-<nav class="navbar">
-  <div class="container">
-    <div class="logo-block">
-      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231e3a2b'/%3E%3Ctext x='50' y='72' font-family='Playfair Display,serif' font-size='48' text-anchor='middle' fill='%23d4b87a' font-weight='700'%3EB%3C/text%3E%3C/svg%3E" alt="Bella Cafe">
-      <div class="logo-text">Bella <span>Cafe</span></div>
-    </div>
-    <button class="hamburger" id="menuToggle"><i class="fas fa-bars"></i></button>
-    <div class="nav-links" id="navLinks">
-      <a href="#home"><i class="fas fa-home"></i> <span class="i18n" data-en="Home" data-np="गृहपृष्ठ">Home</span></a>
-      <a href="#reviews"><i class="fas fa-star"></i> <span class="i18n" data-en="Reviews" data-np="समीक्षाहरू">Reviews</span></a>
-      <a href="#location"><i class="fas fa-map-pin"></i> <span class="i18n" data-en="Location" data-np="स्थान">Location</span></a>
-      <a href="#contact"><i class="fas fa-phone"></i> <span class="i18n" data-en="Contact" data-np="सम्पर्क">Contact</span></a>
-      <div class="lang-toggle">
-        <button class="lang-btn active" id="langEN" onclick="setLang('en')">EN</button>
-        <button class="lang-btn" id="langNP" onclick="setLang('np')">नेपाली</button>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<!-- HERO (unchanged) -->
-<section id="home" class="hero">
-  <div class="container hero-grid">
-    <div class="hero-content">
-      <h1>Bella <i>Cafe</i> <span class="i18n" data-en="&amp; Restaurant" data-np="र रेस्टुरेन्ट">&amp; Restaurant</span></h1>
-      <div class="tagline i18n" data-en="Time for good food. · Damak-05, Traffic Chowk" data-np="राम्रो खानाको समय। · दमक-०५, ट्राफिक चोक">Time for good food. · Damak-05, Traffic Chowk</div>
-      <div class="hero-stats">
-        <span class="stat-item"><i class="fas fa-star"></i> <span class="i18n" data-en="4.8 ★ (12 reviews)" data-np="४.८ ★ (१२ समीक्षा)">4.8 ★ (12 reviews)</span></span>
-        <span class="stat-item"><i class="fas fa-utensils"></i> <span class="i18n" data-en="Dine-in · Takeaway" data-np="डाइन-इन · टेकअवे">Dine-in · Takeaway</span></span>
-        <span class="stat-item"><i class="fas fa-clock"></i> <span class="i18n" data-en="Open now" data-np="अहिले खुला">Open now</span></span>
-      </div>
-      <div class="flex-wrap mt-2">
-        <a href="#reviews" class="btn"><i class="fas fa-star"></i> <span class="i18n" data-en="See Reviews" data-np="समीक्षा हेर्नुहोस्">See Reviews</span></a>
-        <a href="#location" class="btn btn-outline"><i class="fas fa-map"></i> <span class="i18n" data-en="Find Us" data-np="हामीलाई खोज्नुहोस्">Find Us</span></a>
-      </div>
-    </div>
-    <div class="hero-slider">
-      <div class="slider-container" id="heroSlider">
-        <div class="slider-track" id="heroTrack">
-          <img class="slider-slide" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWm6awKkZZJ6HD7Bv2QeayaB5hOFegYb0molnugIXSbxl0FvfTqEY-5rCCQ0nUqrfanHvytU0ycIfOOAStAJWPYEoiBZYIiJIRw9LiNFLi76JcS0zGpePhrSy68l3XZOSO6H9BtW9mNu_RLh=s1360-w1360-h1020-rw" alt="Bella Cafe interior">
-          <img class="slider-slide" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkE0eCy3ekmgqaZmSo9TNDdEXYp2z2jgyMt1XGfht8MCNov1zW2XPKmrjWW9z3JV5c66_oPL8DCdslpk4is8haFMAhNacjqNEA9V1RUGlSYqNsUCC9wBUhsTKwSEGDxNg8vvmoafA=s1360-w1360-h1020-rw" alt="Bella Cafe food">
-          <img class="slider-slide" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkWKos2876qtnH8XmWLA2y5TctRjdPtn5DDwoG7NyjvcoRdLaAmsffPfBttbRxMU4ruNh0SDZGG3gkL1qltNpROL_eAoHia-H43w5QCVIB1REF6DBqGLTKZFrFR82pfRnt1eULeJvIQpLX1=s1360-w1360-h1020-rw" alt="Bella Cafe coffee">
-          <img class="slider-slide" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnNwpV4gjHxk_RWxfeFIQIHHxuoYXzQcoMTx9vQFY6jje07qCCp8mG4VxJIFf1ZQDFLfcLRKuEL2SHqAAHW2HkM3qeIRAVN03d-dn4EQqz07uUOhtyTWQzrrE9qBqvYejy6nAJDMArsvEnI=s1360-w1360-h1020-rw" alt="Bella Cafe pasta">
-          <img class="slider-slide" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnEeyzb1Z5kejyEHqVp4pEY4Ooh_Lk2lN0GTFiXOjWHztkwJ4E-VbpH5669-Vauwb-XIw1qqW8wF5NExgU6Qi6KQCbz_wA7jppGxwBizVs_fcaAOcQUoJp5OcnKZwoNalw6kNrLqKEECzM=s1360-w1360-h1020-rw" alt="Bella Cafe dessert">
-          <img class="slider-slide" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk26FFe0Mi8vkNvyrNxDaSkOOKMUea6nQuR_YQ7f5dAi0jn69x9dOoZlnDtJ8WZJZam3fxc33w8Ch6OIahKtpPcD2Jkg7YzRKlAhtk8CyziLEtA_FpQ4e8c-3nHfWydmvQbCNgv2nIuuVY=s1360-w1360-h1020-rw" alt="Bella Cafe ambiance">
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo-block">
+                <img src="fav.jpeg" alt="Bella Cafe Logo" />
+                <div class="logo-text">Bella <span>Cafe</span></div>
+            </div>
+            <button class="hamburger" id="menuToggle"><i class="fas fa-bars"></i></button>
+            <div class="nav-links" id="navLinks">
+                <a href="#home"><i class="fas fa-home"></i> <span class="i18n" data-en="Home" data-np="गृहपृष्ठ">Home</span></a>
+                <a href="#about"><i class="fas fa-info-circle"></i> <span class="i18n" data-en="About" data-np="हाम्रो बारेमा">About</span></a>
+                <a href="#reviews"><i class="fas fa-star"></i> <span class="i18n" data-en="Reviews" data-np="समीक्षाहरू">Reviews</span></a>
+                <a href="#gallery"><i class="fas fa-images"></i> <span class="i18n" data-en="Gallery" data-np="ग्यालेरी">Gallery</span></a>
+                <a href="#menu"><i class="fas fa-utensils"></i> <span class="i18n" data-en="Menu" data-np="मेनु">Menu</span></a>
+                <a href="#location"><i class="fas fa-map-pin"></i> <span class="i18n" data-en="Location" data-np="स्थान">Location</span></a>
+                <a href="#facilities"><i class="fas fa-concierge-bell"></i> <span class="i18n" data-en="Facilities" data-np="सुविधाहरू">Facilities</span></a>
+                <a href="#book-now"><i class="fas fa-calendar-check"></i> <span class="i18n" data-en="Book Now" data-np="बुक गर्नुहोस्">Book Now</span></a>
+                <a href="#contact"><i class="fas fa-phone"></i> <span class="i18n" data-en="Contact" data-np="सम्पर्क">Contact</span></a>
+                <div class="lang-toggle">
+                    <button class="lang-btn active" id="langEN" onclick="setLang('en')">EN</button>
+                    <button class="lang-btn" id="langNP" onclick="setLang('np')">नेपाली</button>
+                </div>
+            </div>
         </div>
-        <button class="slider-btn prev" id="heroPrev"><i class="fas fa-chevron-left"></i></button>
-        <button class="slider-btn next" id="heroNext"><i class="fas fa-chevron-right"></i></button>
-        <div class="slider-dots" id="heroDots"></div>
-      </div>
-    </div>
-  </div>
-</section>
+    </nav>
 
-<div class="container">
-
-  <!-- ===== REVIEWS SLIDER ===== -->
-  <section id="reviews" style="margin: 20px 0 10px;">
-    <div class="section-title"><i class="fas fa-star"></i> <span class="i18n" data-en="Google Reviews" data-np="गुगल समीक्षाहरू">Google Reviews</span></div>
-    <p class="section-sub i18n" data-en="What our customers say about Bella Cafe" data-np="हाम्रा ग्राहकहरूले बेला क्याफेको बारेमा के भन्छन्">What our customers say about Bella Cafe</p>
-
-    <div class="review-slider-wrap">
-      <div class="review-slider-container" id="reviewSlider">
-        <div class="review-track" id="reviewTrack">
-          <!-- 12 reviews -->
-          <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Cozy atmosphere, delicious coffee and the best pasta in Damak. The staff is incredibly friendly!"</div><div class="reviewer"><div class="avatar">S</div><div><div class="name">Suman Gurung</div><div class="date">2 weeks ago</div></div></div></div>
-          <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Best cafe in town! The cheesecake is to die for and the cappuccino is perfect. Highly recommend."</div><div class="reviewer"><div class="avatar">P</div><div><div class="name">Puja Sharma</div><div class="date">1 month ago</div></div></div></div>
-          <div class="review-card"><div class="stars">★★★★☆</div><div class="review-text">"Great place for meetings. WiFi is fast, food is good, and the ambiance is very relaxing."</div><div class="reviewer"><div class="avatar">R</div><div><div class="name">Ramesh Adhikari</div><div class="date">3 weeks ago</div></div></div></div>
-          <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"The chicken biryani here is amazing! Always fresh and flavorful. My go-to spot in Damak."</div><div class="reviewer"><div class="avatar">A</div><div><div class="name">Amit Thapa</div><div class="date">2 months ago</div></div></div></div>
-          <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Loved the outdoor seating. Perfect for evening coffee with friends. Very friendly service."</div><div class="reviewer"><div class="avatar">N</div><div><div class="name">Nisha Rai</div><div class="date">1 week ago</div></div></div></div>
-          <div class="review-card"><div class="stars">★★★★☆</div><div class="review-text">"Good food and reasonable prices. The pizza could be a bit more crispy but overall great experience."</div><div class="reviewer"><div class="avatar">K</div><div><div class="name">Kiran Poudel</div><div class="date">3 months ago</div></div></div></div>
-          <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Best momo in Jhapa! The chutney is amazing. Will definitely come back again."</div><div class="reviewer"><div class="avatar">M</div><div><div class="name">Maya Limbu</div><div class="date">1 month ago</div></div></div></div>
-          <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Professional staff and great ambiance. Perfect for family dinners and celebrations."</div><div class="reviewer"><div class="avatar">D</div><div><div class="name">Deepak Khadka</div><div class="date">2 weeks ago</div></div></div></div>
-          <div class="review-card"><div class="stars">★★★★☆</div><div class="review-text">"Nice place, good food. Service could be faster during peak hours but overall satisfied."</div><div class="reviewer"><div class="avatar">S</div><div><div class="name">Sita Dahal</div><div class="date">1 month ago</div></div></div></div>
-          <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"The milkshakes are incredible! My kids love the KitKat shake. A must-visit in Damak."</div><div class="reviewer"><div class="avatar">R</div><div><div class="name">Rajeshwor Subedi</div><div class="date">3 weeks ago</div></div></div></div>
-          <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Amazing hospitality! The owner personally ensures every customer is happy. Great food too."</div><div class="reviewer"><div class="avatar">B</div><div><div class="name">Bimala Nepali</div><div class="date">2 months ago</div></div></div></div>
-          <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Perfect for breakfast. The avocado toast and fresh juice are my favorites. Highly recommended!"</div><div class="reviewer"><div class="avatar">S</div><div><div class="name">Srijana Karki</div><div class="date">1 week ago</div></div></div></div>
+    <!-- ===== HERO ===== -->
+    <section id="home" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <h1>Bella <i>Cafe</i> <span class="i18n" data-en="&amp; Restaurant" data-np="र रेस्टुरेन्ट">&amp; Restaurant</span></h1>
+                <div class="tagline i18n" data-en="Time for good food. · Damak-05, Traffic Chowk" data-np="राम्रो खानाको समय। · दमक-०५, ट्राफिक चोक">Time for good food. · Damak-05, Traffic Chowk</div>
+                <div class="hero-stats">
+                    <span class="stat-item"><i class="fas fa-star"></i> <span class="i18n" data-en="4.8 ★ (12 reviews)" data-np="४.८ ★ (१२ समीक्षा)">4.8 ★ (12 reviews)</span></span>
+                    <span class="stat-item"><i class="fas fa-utensils"></i> <span class="i18n" data-en="Dine-in · Takeaway" data-np="डाइन-इन · टेकअवे">Dine-in · Takeaway</span></span>
+                    <span class="stat-item"><i class="fas fa-clock"></i> <span class="i18n" data-en="Open now" data-np="अहिले खुला">Open now</span></span>
+                </div>
+                <div class="flex-wrap mt-2">
+                    <a href="#reviews" class="btn"><i class="fas fa-star"></i> <span class="i18n" data-en="See Reviews" data-np="समीक्षा हेर्नुहोस्">See Reviews</span></a>
+                    <a href="#location" class="btn btn-outline"><i class="fas fa-map"></i> <span class="i18n" data-en="Find Us" data-np="हामीलाई खोज्नुहोस्">Find Us</span></a>
+                </div>
+            </div>
+            <div class="hero-slider">
+                <div class="slider-container" id="heroSlider">
+                    <div class="slider-track" id="heroTrack">
+                        <img class="slider-slide" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWm6awKkZZJ6HD7Bv2QeayaB5hOFegYb0molnugIXSbxl0FvfTqEY-5rCCQ0nUqrfanHvytU0ycIfOOAStAJWPYEoiBZYIiJIRw9LiNFLi76JcS0zGpePhrSy68l3XZOSO6H9BtW9mNu_RLh=s1360-w1360-h1020-rw" alt="Bella Cafe interior" />
+                        <img class="slider-slide" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkE0eCy3ekmgqaZmSo9TNDdEXYp2z2jgyMt1XGfht8MCNov1zW2XPKmrjWW9z3JV5c66_oPL8DCdslpk4is8haFMAhNacjqNEA9V1RUGlSYqNsUCC9wBUhsTKwSEGDxNg8vvmoafA=s1360-w1360-h1020-rw" alt="Bella Cafe food" />
+                        <img class="slider-slide" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkWKos2876qtnH8XmWLA2y5TctRjdPtn5DDwoG7NyjvcoRdLaAmsffPfBttbRxMU4ruNh0SDZGG3gkL1qltNpROL_eAoHia-H43w5QCVIB1REF6DBqGLTKZFrFR82pfRnt1eULeJvIQpLX1=s1360-w1360-h1020-rw" alt="Bella Cafe coffee" />
+                        <img class="slider-slide" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnNwpV4gjHxk_RWxfeFIQIHHxuoYXzQcoMTx9vQFY6jje07qCCp8mG4VxJIFf1ZQDFLfcLRKuEL2SHqAAHW2HkM3qeIRAVN03d-dn4EQqz07uUOhtyTWQzrrE9qBqvYejy6nAJDMArsvEnI=s1360-w1360-h1020-rw" alt="Bella Cafe pasta" />
+                        <img class="slider-slide" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnEeyzb1Z5kejyEHqVp4pEY4Ooh_Lk2lN0GTFiXOjWHztkwJ4E-VbpH5669-Vauwb-XIw1qqW8wF5NExgU6Qi6KQCbz_wA7jppGxwBizVs_fcaAOcQUoJp5OcnKZwoNalw6kNrLqKEECzM=s1360-w1360-h1020-rw" alt="Bella Cafe dessert" />
+                        <img class="slider-slide" src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk26FFe0Mi8vkNvyrNxDaSkOOKMUea6nQuR_YQ7f5dAi0jn69x9dOoZlnDtJ8WZJZam3fxc33w8Ch6OIahKtpPcD2Jkg7YzRKlAhtk8CyziLEtA_FpQ4e8c-3nHfWydmvQbCNgv2nIuuVY=s1360-w1360-h1020-rw" alt="Bella Cafe ambiance" />
+                    </div>
+                    <button class="slider-btn prev" id="heroPrev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="slider-btn next" id="heroNext"><i class="fas fa-chevron-right"></i></button>
+                    <div class="slider-dots" id="heroDots"></div>
+                </div>
+            </div>
         </div>
-      </div>
-      <button class="review-slider-btn prev" id="reviewPrev"><i class="fas fa-chevron-left"></i></button>
-      <button class="review-slider-btn next" id="reviewNext"><i class="fas fa-chevron-right"></i></button>
-      <div class="review-dots" id="reviewDots"></div>
+    </section>
+
+    <div class="container">
+
+        <!-- ===== ABOUT US ===== -->
+        <section id="about" style="margin: 32px 0 16px;">
+            <div class="section-title"><i class="fas fa-info-circle"></i> <span class="i18n" data-en="About Us" data-np="हाम्रो बारेमा">About Us</span></div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p><strong>Bella Cafe</strong> is a cozy haven in the heart of Damak, offering a perfect blend of delicious food, aromatic coffee, and a warm ambiance. Whether you're looking for a quick bite or a relaxing meal with friends and family, we bring you the best of local and international flavors.</p>
+                    <p style="margin-top: 12px;">Visit us at <strong>Traffic Chowk</strong> to experience the true taste of Jhapa. Our doors are open from 7:30 AM to 9:30 PM, ready to serve you with a smile.</p>
+                    <div style="display: flex; gap: 16px; margin-top: 20px; flex-wrap: wrap;">
+                        <span style="background: white; padding: 4px 16px; border-radius: 40px; border: 1px solid #d4b87a; font-size: 0.9rem;"><i class="fas fa-check-circle" style="color: #b8944c;"></i> Fresh Ingredients</span>
+                        <span style="background: white; padding: 4px 16px; border-radius: 40px; border: 1px solid #d4b87a; font-size: 0.9rem;"><i class="fas fa-check-circle" style="color: #b8944c;"></i> Expert Baristas</span>
+                        <span style="background: white; padding: 4px 16px; border-radius: 40px; border: 1px solid #d4b87a; font-size: 0.9rem;"><i class="fas fa-check-circle" style="color: #b8944c;"></i> Cozy Vibes</span>
+                    </div>
+                </div>
+                <div class="about-slider-wrapper">
+                    <div class="slider-container" id="aboutSlider">
+                        <div class="slider-track" id="aboutTrack">
+                            <img class="slider-slide" src="first.jpeg" alt="Bella Cafe Interior" onerror="this.onerror=null; this.src='https://picsum.photos/seed/bella1/800/400';">
+                            <img class="slider-slide" src="second.jpeg" alt="Bella Cafe Food" onerror="this.onerror=null; this.src='https://picsum.photos/seed/bella2/800/400';">
+                        </div>
+                        <button class="slider-btn prev" id="aboutPrev"><i class="fas fa-chevron-left"></i></button>
+                        <button class="slider-btn next" id="aboutNext"><i class="fas fa-chevron-right"></i></button>
+                        <div class="slider-dots" id="aboutDots"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== REVIEWS ===== -->
+        <section id="reviews" style="margin: 20px 0 10px;">
+            <div class="section-title"><i class="fas fa-star"></i> <span class="i18n" data-en="Google Reviews" data-np="गुगल समीक्षाहरू">Google Reviews</span></div>
+            <p class="section-sub i18n" data-en="What our customers say about Bella Cafe" data-np="हाम्रा ग्राहकहरूले बेला क्याफेको बारेमा के भन्छन्">What our customers say about Bella Cafe</p>
+
+            <div class="review-slider-wrap">
+                <div class="review-slider-container" id="reviewSlider">
+                    <div class="review-track" id="reviewTrack">
+                        <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Cozy atmosphere, delicious coffee and the best pasta in Damak. The staff is incredibly friendly!"</div><div class="reviewer"><div class="avatar">S</div><div><div class="name">Suman Gurung</div><div class="date">2 weeks ago</div></div></div></div>
+                        <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Best cafe in town! The cheesecake is to die for and the cappuccino is perfect. Highly recommend."</div><div class="reviewer"><div class="avatar">P</div><div><div class="name">Puja Sharma</div><div class="date">1 month ago</div></div></div></div>
+                        <div class="review-card"><div class="stars">★★★★☆</div><div class="review-text">"Great place for meetings. WiFi is fast, food is good, and the ambiance is very relaxing."</div><div class="reviewer"><div class="avatar">R</div><div><div class="name">Ramesh Adhikari</div><div class="date">3 weeks ago</div></div></div></div>
+                        <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"The chicken biryani here is amazing! Always fresh and flavorful. My go-to spot in Damak."</div><div class="reviewer"><div class="avatar">A</div><div><div class="name">Amit Thapa</div><div class="date">2 months ago</div></div></div></div>
+                        <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Loved the outdoor seating. Perfect for evening coffee with friends. Very friendly service."</div><div class="reviewer"><div class="avatar">N</div><div><div class="name">Nisha Rai</div><div class="date">1 week ago</div></div></div></div>
+                        <div class="review-card"><div class="stars">★★★★☆</div><div class="review-text">"Good food and reasonable prices. The pizza could be a bit more crispy but overall great experience."</div><div class="reviewer"><div class="avatar">K</div><div><div class="name">Kiran Poudel</div><div class="date">3 months ago</div></div></div></div>
+                        <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Best momo in Jhapa! The chutney is amazing. Will definitely come back again."</div><div class="reviewer"><div class="avatar">M</div><div><div class="name">Maya Limbu</div><div class="date">1 month ago</div></div></div></div>
+                        <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Professional staff and great ambiance. Perfect for family dinners and celebrations."</div><div class="reviewer"><div class="avatar">D</div><div><div class="name">Deepak Khadka</div><div class="date">2 weeks ago</div></div></div></div>
+                        <div class="review-card"><div class="stars">★★★★☆</div><div class="review-text">"Nice place, good food. Service could be faster during peak hours but overall satisfied."</div><div class="reviewer"><div class="avatar">S</div><div><div class="name">Sita Dahal</div><div class="date">1 month ago</div></div></div></div>
+                        <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"The milkshakes are incredible! My kids love the KitKat shake. A must-visit in Damak."</div><div class="reviewer"><div class="avatar">R</div><div><div class="name">Rajeshwor Subedi</div><div class="date">3 weeks ago</div></div></div></div>
+                        <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Amazing hospitality! The owner personally ensures every customer is happy. Great food too."</div><div class="reviewer"><div class="avatar">B</div><div><div class="name">Bimala Nepali</div><div class="date">2 months ago</div></div></div></div>
+                        <div class="review-card"><div class="stars">★★★★★</div><div class="review-text">"Perfect for breakfast. The avocado toast and fresh juice are my favorites. Highly recommended!"</div><div class="reviewer"><div class="avatar">S</div><div><div class="name">Srijana Karki</div><div class="date">1 week ago</div></div></div></div>
+                    </div>
+                </div>
+                <button class="review-slider-btn prev" id="reviewPrev"><i class="fas fa-chevron-left"></i></button>
+                <button class="review-slider-btn next" id="reviewNext"><i class="fas fa-chevron-right"></i></button>
+                <div class="review-dots" id="reviewDots"></div>
+            </div>
+        </section>
+
+        <!-- ===== GALLERY ===== -->
+        <section id="gallery" style="margin: 32px 0 16px;">
+            <div class="section-title"><i class="fas fa-images"></i> <span class="i18n" data-en="Our Gallery" data-np="हाम्रो ग्यालेरी">Our Gallery</span></div>
+            <p class="section-sub i18n" data-en="A glimpse of our food, ambiance, and moments at Bella Cafe" data-np="बेला क्याफेको खाना, वातावरण र क्षणहरूको झलक">A glimpse of our food, ambiance, and moments at Bella Cafe</p>
+
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item" data-img="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWm6awKkZZJ6HD7Bv2QeayaB5hOFegYb0molnugIXSbxl0FvfTqEY-5rCCQ0nUqrfanHvytU0ycIfOOAStAJWPYEoiBZYIiJIRw9LiNFLi76JcS0zGpePhrSy68l3XZOSO6H9BtW9mNu_RLh=s1360-w1360-h1020-rw" data-caption="Cozy Interior">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWm6awKkZZJ6HD7Bv2QeayaB5hOFegYb0molnugIXSbxl0FvfTqEY-5rCCQ0nUqrfanHvytU0ycIfOOAStAJWPYEoiBZYIiJIRw9LiNFLi76JcS0zGpePhrSy68l3XZOSO6H9BtW9mNu_RLh=s1360-w1360-h1020-rw" alt="Interior" />
+                    <div class="gallery-overlay"><i class="fas fa-expand"></i> Cozy Interior</div>
+                </div>
+                <div class="gallery-item" data-img="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkE0eCy3ekmgqaZmSo9TNDdEXYp2z2jgyMt1XGfht8MCNov1zW2XPKmrjWW9z3JV5c66_oPL8DCdslpk4is8haFMAhNacjqNEA9V1RUGlSYqNsUCC9wBUhsTKwSEGDxNg8vvmoafA=s1360-w1360-h1020-rw" data-caption="Delicious Food">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkE0eCy3ekmgqaZmSo9TNDdEXYp2z2jgyMt1XGfht8MCNov1zW2XPKmrjWW9z3JV5c66_oPL8DCdslpk4is8haFMAhNacjqNEA9V1RUGlSYqNsUCC9wBUhsTKwSEGDxNg8vvmoafA=s1360-w1360-h1020-rw" alt="Food" />
+                    <div class="gallery-overlay"><i class="fas fa-expand"></i> Delicious Food</div>
+                </div>
+                <div class="gallery-item" data-img="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkWKos2876qtnH8XmWLA2y5TctRjdPtn5DDwoG7NyjvcoRdLaAmsffPfBttbRxMU4ruNh0SDZGG3gkL1qltNpROL_eAoHia-H43w5QCVIB1REF6DBqGLTKZFrFR82pfRnt1eULeJvIQpLX1=s1360-w1360-h1020-rw" data-caption="Fresh Coffee">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWkWKos2876qtnH8XmWLA2y5TctRjdPtn5DDwoG7NyjvcoRdLaAmsffPfBttbRxMU4ruNh0SDZGG3gkL1qltNpROL_eAoHia-H43w5QCVIB1REF6DBqGLTKZFrFR82pfRnt1eULeJvIQpLX1=s1360-w1360-h1020-rw" alt="Coffee" />
+                    <div class="gallery-overlay"><i class="fas fa-expand"></i> Fresh Coffee</div>
+                </div>
+                <div class="gallery-item" data-img="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnNwpV4gjHxk_RWxfeFIQIHHxuoYXzQcoMTx9vQFY6jje07qCCp8mG4VxJIFf1ZQDFLfcLRKuEL2SHqAAHW2HkM3qeIRAVN03d-dn4EQqz07uUOhtyTWQzrrE9qBqvYejy6nAJDMArsvEnI=s1360-w1360-h1020-rw" data-caption="Pasta &amp; More">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnNwpV4gjHxk_RWxfeFIQIHHxuoYXzQcoMTx9vQFY6jje07qCCp8mG4VxJIFf1ZQDFLfcLRKuEL2SHqAAHW2HkM3qeIRAVN03d-dn4EQqz07uUOhtyTWQzrrE9qBqvYejy6nAJDMArsvEnI=s1360-w1360-h1020-rw" alt="Pasta" />
+                    <div class="gallery-overlay"><i class="fas fa-expand"></i> Pasta &amp; More</div>
+                </div>
+                <div class="gallery-item" data-img="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnEeyzb1Z5kejyEHqVp4pEY4Ooh_Lk2lN0GTFiXOjWHztkwJ4E-VbpH5669-Vauwb-XIw1qqW8wF5NExgU6Qi6KQCbz_wA7jppGxwBizVs_fcaAOcQUoJp5OcnKZwoNalw6kNrLqKEECzM=s1360-w1360-h1020-rw" data-caption="Sweet Treats">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWnEeyzb1Z5kejyEHqVp4pEY4Ooh_Lk2lN0GTFiXOjWHztkwJ4E-VbpH5669-Vauwb-XIw1qqW8wF5NExgU6Qi6KQCbz_wA7jppGxwBizVs_fcaAOcQUoJp5OcnKZwoNalw6kNrLqKEECzM=s1360-w1360-h1020-rw" alt="Dessert" />
+                    <div class="gallery-overlay"><i class="fas fa-expand"></i> Sweet Treats</div>
+                </div>
+                <div class="gallery-item" data-img="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk26FFe0Mi8vkNvyrNxDaSkOOKMUea6nQuR_YQ7f5dAi0jn69x9dOoZlnDtJ8WZJZam3fxc33w8Ch6OIahKtpPcD2Jkg7YzRKlAhtk8CyziLEtA_FpQ4e8c-3nHfWydmvQbCNgv2nIuuVY=s1360-w1360-h1020-rw" data-caption="Warm Ambiance">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWk26FFe0Mi8vkNvyrNxDaSkOOKMUea6nQuR_YQ7f5dAi0jn69x9dOoZlnDtJ8WZJZam3fxc33w8Ch6OIahKtpPcD2Jkg7YzRKlAhtk8CyziLEtA_FpQ4e8c-3nHfWydmvQbCNgv2nIuuVY=s1360-w1360-h1020-rw" alt="Ambiance" />
+                    <div class="gallery-overlay"><i class="fas fa-expand"></i> Warm Ambiance</div>
+                </div>
+                <div class="gallery-item" data-img="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWl2f_sM5Wpdz_86-XWY2CvWq1gKNOGC9SQuaJNCzG_CMbWxKWVugy3tD01Z_EGW3jjCG-Q34hn87dv9i4jBEGc2WqUQLVQUCzbQJNC8vcp5zE1bx4i7kER8a72qkXgX1w6QxE5i3p6m=s1360-w1360-h1020-rw" data-caption="Tasty Momo">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWl2f_sM5Wpdz_86-XWY2CvWq1gKNOGC9SQuaJNCzG_CMbWxKWVugy3tD01Z_EGW3jjCG-Q34hn87dv9i4jBEGc2WqUQLVQUCzbQJNC8vcp5zE1bx4i7kER8a72qkXgX1w6QxE5i3p6m=s1360-w1360-h1020-rw" alt="Momo" />
+                    <div class="gallery-overlay"><i class="fas fa-expand"></i> Tasty Momo</div>
+                </div>
+                <div class="gallery-item" data-img="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmWfiIS2hyD2QbG-s8yprDg1PgqEl_wIqSseuTpNscRxbA-IZgw1lbOotT2AXKOxA0za7lL6fRD5DcXjB-KfplPxXqnKUGF2YkQ_iL-WqngKtW5WqWn17_6b0aQ3NfrRzYZswE05p9H=s1360-w1360-h1020-rw" data-caption="Outdoor Seating">
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHRPTWmWfiIS2hyD2QbG-s8yprDg1PgqEl_wIqSseuTpNscRxbA-IZgw1lbOotT2AXKOxA0za7lL6fRD5DcXjB-KfplPxXqnKUGF2YkQ_iL-WqngKtW5WqWn17_6b0aQ3NfrRzYZswE05p9H=s1360-w1360-h1020-rw" alt="Outdoor" />
+                    <div class="gallery-overlay"><i class="fas fa-expand"></i> Outdoor Seating</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== MENU ===== -->
+        <section id="menu" style="margin: 16px 0 8px;">
+            <div class="section-title"><i class="fas fa-utensils"></i> <span class="i18n" data-en="Our Menu" data-np="हाम्रो मेनु">Our Menu</span></div>
+            <p class="section-sub i18n" data-en="Explore our handcrafted dishes and beverages" data-np="हाम्रा हस्तनिर्मित परिकार र पेय पदार्थहरू हेर्नुहोस्">Explore our handcrafted dishes and beverages</p>
+
+            <div class="menu-section">
+                <div class="menu-grid">
+                    <!-- Coffee -->
+                    <div class="menu-category">
+                        <h3><i class="fas fa-mug-hot"></i> Coffee</h3>
+                        <div class="menu-item"><span class="name">Espresso <span class="desc">Rich &amp; bold</span></span><span class="price">Rs. 250</span></div>
+                        <div class="menu-item"><span class="name">Cappuccino <span class="desc">Creamy foam</span></span><span class="price">Rs. 350</span></div>
+                        <div class="menu-item"><span class="name">Latte <span class="desc">Smooth &amp; silky</span></span><span class="price">Rs. 380</span></div>
+                        <div class="menu-item"><span class="name">Mocha <span class="desc">Chocolate twist</span></span><span class="price">Rs. 420</span></div>
+                        <div class="menu-item"><span class="name">Caramel Macchiato <span class="desc">Sweet &amp; indulgent</span></span><span class="price">Rs. 450</span></div>
+                    </div>
+                    <!-- Breakfast -->
+                    <div class="menu-category">
+                        <h3><i class="fas fa-sun"></i> Breakfast</h3>
+                        <div class="menu-item"><span class="name">Avocado Toast <span class="desc">Sourdough, avocado, poached egg</span></span><span class="price">Rs. 550</span></div>
+                        <div class="menu-item"><span class="name">Pancakes <span class="desc">Maple syrup &amp; berries</span></span><span class="price">Rs. 500</span></div>
+                        <div class="menu-item"><span class="name">Omelette <span class="desc">Three eggs, cheese, herbs</span></span><span class="price">Rs. 600</span></div>
+                        <div class="menu-item"><span class="name">Croissant <span class="desc">Butter, flaky perfection</span></span><span class="price">Rs. 350</span></div>
+                        <div class="menu-item"><span class="name">Fruit Bowl <span class="desc">Fresh seasonal fruits</span></span><span class="price">Rs. 400</span></div>
+                    </div>
+                    <!-- Lunch / Mains -->
+                    <div class="menu-category">
+                        <h3><i class="fas fa-utensil-spoon"></i> Mains</h3>
+                        <div class="menu-item"><span class="name">Chicken Biryani <span class="desc">Aromatic basmati rice</span></span><span class="price">Rs. 750</span></div>
+                        <div class="menu-item"><span class="name">Pasta Alfredo <span class="desc">Creamy parmesan sauce</span></span><span class="price">Rs. 680</span></div>
+                        <div class="menu-item"><span class="name">Margherita Pizza <span class="desc">Mozzarella, basil, tomato</span></span><span class="price">Rs. 600</span></div>
+                        <div class="menu-item"><span class="name">Momo (10 pcs) <span class="desc">Steamed or fried, chutney</span></span><span class="price">Rs. 450</span></div>
+                        <div class="menu-item"><span class="name">Grilled Sandwich <span class="desc">Chicken, cheese, veggies</span></span><span class="price">Rs. 520</span></div>
+                    </div>
+                    <!-- Desserts & Drinks -->
+                    <div class="menu-category">
+                        <h3><i class="fas fa-cake"></i> Desserts &amp; Drinks</h3>
+                        <div class="menu-item"><span class="name">Cheesecake <span class="desc">New York style</span></span><span class="price">Rs. 450</span></div>
+                        <div class="menu-item"><span class="name">Chocolate Lava Cake <span class="desc">Warm, gooey center</span></span><span class="price">Rs. 500</span></div>
+                        <div class="menu-item"><span class="name">Milkshake <span class="desc">Chocolate, vanilla, strawberry</span></span><span class="price">Rs. 350</span></div>
+                        <div class="menu-item"><span class="name">Fresh Juice <span class="desc">Orange, apple, mixed</span></span><span class="price">Rs. 280</span></div>
+                        <div class="menu-item"><span class="name">Ice Cream Sundae <span class="desc">With toppings &amp; sauce</span></span><span class="price">Rs. 380</span></div>
+                    </div>
+                </div>
+                <div style="text-align:center; margin-top:20px;">
+                    <a href="#" class="btn btn-gold" style="font-size:0.9rem;"><i class="fas fa-download"></i> <span class="i18n" data-en="Download Full Menu" data-np="पूरा मेनु डाउनलोड गर्नुहोस्">Download Full Menu</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== LOCATION (UPDATED STREET VIEW) ===== -->
+        <section id="location" style="margin: 32px 0 16px;">
+            <div class="section-title"><i class="fas fa-map-pin"></i> <span class="i18n" data-en="Find Us" data-np="हामीलाई खोज्नुहोस्">Find Us</span></div>
+
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3535.101356476347!2d87.6944755!3d26.6610204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e58d81d2c7d2d1%3A0x1a2b3c4d5e6f7890!2sDamak%2C%20Nepal!5e0!3m2!1sen!2snp!4v1710000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Bella Cafe location Damak"></iframe>
+            </div>
+
+            <div class="action-buttons">
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Damak-05+Traffic+Chowk+Near+Gorkha+Department+Jhapa+Nepal" target="_blank" class="btn"><i class="fas fa-directions"></i> <span class="i18n" data-en="Get Directions" data-np="दिशा निर्देशन">Get Directions</span></a>
+                <a href="https://www.google.com/maps?q=Damak-05+Traffic+Chowk+Near+Gorkha+Department+Jhapa+Nepal&layer=c" target="_blank" class="btn btn-outline"><i class="fas fa-street-view"></i> <span class="i18n" data-en="Street View" data-np="सडक दृश्य">Street View</span></a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Damak-05+Traffic+Chowk+Near+Gorkha+Department+Jhapa+Nepal" target="_blank" class="btn btn-gold"><i class="fas fa-map-marked-alt"></i> <span class="i18n" data-en="Open in Google Maps" data-np="गुगल नक्सामा खोल्नुहोस्">Open in Google Maps</span></a>
+            </div>
+
+            <div style="background: #f5f2e0; border-radius: 28px; padding: 20px 24px; border: 2px solid #d4b87a; margin: 16px 0;">
+                <div style="display: flex; flex-wrap: wrap; gap: 16px 32px;">
+                    <div><i class="fas fa-location-dot" style="color:#b8944c; width:24px;"></i> <span class="i18n" data-en="Damak-05, Traffic Chowk, Near Gorkha Department, Jhapa, Nepal" data-np="दमक-०५, ट्राफिक चोक, गोर्खा विभाग नजिक, झापा, नेपाल">Damak-05, Traffic Chowk, Near Gorkha Department, Jhapa, Nepal</span></div>
+                    <div><i class="fas fa-phone" style="color:#b8944c; width:24px;"></i> <a href="tel:9852630088" style="color:#1e3a2b; text-decoration:none;">+977 985-2630088</a> · <a href="tel:023591588" style="color:#1e3a2b; text-decoration:none;">023-591588</a></div>
+                    <div><i class="fas fa-clock" style="color:#b8944c; width:24px;"></i> <span class="i18n" data-en="Mon–Sun: 7:30 AM – 9:30 PM" data-np="सोम–आइत: बिहान ७:३० – राति ९:३०">Mon–Sun: 7:30 AM – 9:30 PM</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FACILITIES ===== -->
+        <section id="facilities" style="margin: 32px 0 16px;">
+            <div class="section-title"><i class="fas fa-concierge-bell"></i> <span class="i18n" data-en="Our Facilities" data-np="हाम्रा सुविधाहरू">Our Facilities</span></div>
+            <p class="section-sub i18n" data-en="Everything we offer to make your visit comfortable and enjoyable" data-np="तपाईंको भ्रमणलाई आरामदायक र रमाइलो बनाउन हामीले प्रदान गर्ने सबै सुविधाहरू">Everything we offer to make your visit comfortable and enjoyable</p>
+
+            <div class="facilities-grid">
+                <div class="facility-card"><i class="fas fa-wifi"></i><h4>Free Wi-Fi</h4><p>High-speed internet throughout</p></div>
+                <div class="facility-card"><i class="fas fa-parking"></i><h4>Free Parking</h4><p>Ample space for vehicles</p></div>
+                <div class="facility-card"><i class="fas fa-wheelchair"></i><h4>Wheelchair Access</h4><p>Ramps &amp; accessible seating</p></div>
+                <div class="facility-card"><i class="fas fa-tree"></i><h4>Outdoor Seating</h4><p>Relax in the fresh air</p></div>
+                <div class="facility-card"><i class="fas fa-baby"></i><h4>Kids Friendly</h4><p>High chairs &amp; kids menu</p></div>
+                <div class="facility-card"><i class="fas fa-music"></i><h4>Live Music</h4><p>Evenings with local artists</p></div>
+                <div class="facility-card"><i class="fas fa-coffee"></i><h4>Takeaway</h4><p>Order &amp; pick up on the go</p></div>
+                <div class="facility-card"><i class="fas fa-credit-card"></i><h4>Card Payment</h4><p>Visa, Mastercard &amp; mobile</p></div>
+            </div>
+        </section>
+
+        <!-- ===== BOOK NOW ===== -->
+        <section id="book-now" style="margin: 32px 0 16px;">
+            <div class="section-title"><i class="fas fa-calendar-check"></i> <span class="i18n" data-en="Book a Table" data-np="टेबल बुक गर्नुहोस्">Book a Table</span></div>
+            <div style="background: #f5f2e0; border-radius: 32px; border: 2px solid #d4b87a; padding: 32px 24px; text-align: center;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #1e3a2b;">Reserve Your Spot</h3>
+                <p style="max-width: 500px; margin: 12px auto; color: #3e5a3f;">Planning a visit? Give us a call to book your table in advance and avoid the wait.</p>
+                <a href="tel:9852630088" class="btn btn-gold" style="font-size: 1.2rem; padding: 14px 40px; margin-top: 12px;"><i class="fas fa-phone-alt"></i> +977 985-2630088</a>
+                <p style="margin-top: 16px; color: #6d7f5e; font-size: 0.9rem;">Or reach out to us on WhatsApp</p>
+                <a href="https://wa.me/9779852630088" target="_blank" class="btn" style="background: #25d366; border-color: #25d366; margin-top: 8px;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+        </section>
+
+        <!-- ===== CONTACT ===== -->
+        <section id="contact" style="margin: 32px 0 16px;">
+            <div class="section-title"><i class="fas fa-headset"></i> <span class="i18n" data-en="Contact &amp; Hours" data-np="सम्पर्क र समय">Contact &amp; Hours</span></div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 16px;">
+                <div style="background:white; border-radius:20px; padding:20px; border:1px solid #d4b87a;"><i class="fas fa-phone-alt" style="color:#b8944c; font-size:1.6rem;"></i><h3 style="margin:8px 0 4px;" class="i18n" data-en="Call us" data-np="फोन गर्नुहोस्">Call us</h3><p>985-2630088 · 023-591588</p></div>
+                <div style="background:white; border-radius:20px; padding:20px; border:1px solid #d4b87a;"><i class="fas fa-envelope" style="color:#b8944c; font-size:1.6rem;"></i><h3 style="margin:8px 0 4px;" class="i18n" data-en="Email" data-np="इमेल">Email</h3><p>bellacafedamak5@gmail.com</p></div>
+                <div style="background:white; border-radius:20px; padding:20px; border:1px solid #d4b87a;"><i class="fab fa-whatsapp" style="color:#b8944c; font-size:1.6rem;"></i><h3 style="margin:8px 0 4px;">WhatsApp</h3><p><a href="https://wa.me/9779852630088" target="_blank" style="color:#1e3a2b; font-weight:600;">+977 985-2630088</a></p></div>
+            </div>
+        </section>
+
     </div>
-  </section>
 
-  <!-- ===== LOCATION + MAP + DIRECTION + STREET VIEW ===== -->
-  <section id="location" style="margin: 32px 0 16px;">
-    <div class="section-title"><i class="fas fa-map-pin"></i> <span class="i18n" data-en="Find Us" data-np="हामीलाई खोज्नुहोस्">Find Us</span></div>
-    
-    <!-- Map -->
-    <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3535.101356476347!2d87.6944755!3d26.6610204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e58d81d2c7d2d1%3A0x1a2b3c4d5e6f7890!2sDamak%2C%20Nepal!5e0!3m2!1sen!2snp!4v1710000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Bella Cafe location Damak"></iframe>
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+                    <img src="fav.jpeg" alt="Bella Cafe Logo" style="height:34px; width:34px; border-radius:8px; object-fit:cover; border:2px solid #d4b87a;" />
+                    <span style="font-family:'Playfair Display',serif; font-size:1.4rem; color:#f5f2e0;">Bella <span style="font-weight:400; color:#d4b87a;">Cafe</span></span>
+                </div>
+                <p style="max-width:340px; opacity:0.8; font-size:0.9rem;" class="i18n" data-en="Damak-05, Traffic Chowk · Near Gorkha Department · Nepal" data-np="दमक-०५, ट्राफिक चोक · गोर्खा विभाग नजिक · नेपाल">Damak-05, Traffic Chowk · Near Gorkha Department · Nepal</p>
+                <div style="display:flex; gap:14px; margin-top:10px; font-size:1.2rem;">
+                    <a href="#" style="color:#d4b87a;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color:#d4b87a;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color:#d4b87a;"><i class="fab fa-google"></i></a>
+                </div>
+            </div>
+            <div class="footer-copy">
+                <p>© 2026 Bella Cafe & Restaurant</p>
+                <p style="font-size:0.8rem; margin-top:4px;" class="i18n" data-en="good food · good times" data-np="राम्रो खाना · राम्रो समय">good food · good times</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== FLOATING BUTTONS ===== -->
+    <a href="tel:9852630088" class="book-now-float" id="bookNowBtn">
+        <i class="fas fa-calendar-check"></i>
+        <span class="i18n" data-en="Book Now" data-np="अहिले बुक गर्नुहोस्">Book Now</span>
+    </a>
+
+    <div class="float-buttons">
+        <a href="https://wa.me/9779852630088?text=Hello%20Bella%20Cafe%2C%20I'd%20like%20to%20know%20more%20about%20your%20menu%20and%20offers." target="_blank" rel="noopener" class="float-btn whatsapp">
+            <i class="fab fa-whatsapp"></i>
+            <span class="label">WhatsApp</span>
+        </a>
+        <a href="tel:9852630088" class="float-btn phone">
+            <i class="fas fa-phone-alt"></i>
+            <span class="label">Call</span>
+        </a>
     </div>
 
-    <!-- Action Buttons: Direction & Street View -->
-    <div class="action-buttons">
-      <a href="https://www.google.com/maps/dir/?api=1&destination=Damak+5+Traffic+Chowk+Nepal" target="_blank" class="btn"><i class="fas fa-directions"></i> <span class="i18n" data-en="Get Directions" data-np="दिशा निर्देशन">Get Directions</span></a>
-      <a href="https://www.google.com/maps?q=26.6610,87.6945&layer=c&cbll=26.6610,87.6945&cbp=11,0,0,0,0" target="_blank" class="btn btn-outline"><i class="fas fa-street-view"></i> <span class="i18n" data-en="Street View" data-np="सडक दृश्य">Street View</span></a>
-      <a href="https://www.google.com/maps/search/?api=1&query=Damak+IT+Centre+Damak-5+Jhapa+Nepal" target="_blank" class="btn btn-gold"><i class="fas fa-map-marked-alt"></i> <span class="i18n" data-en="Open in Google Maps" data-np="गुगल नक्सामा खोल्नुहोस्">Open in Google Maps</span></a>
+    <!-- ===== LIGHTBOX ===== -->
+    <div class="lightbox" id="lightbox">
+        <button class="close-lightbox" id="closeLightbox"><i class="fas fa-times"></i></button>
+        <img id="lightboxImg" src="" alt="Gallery" />
+        <div class="lightbox-caption" id="lightboxCaption">Caption</div>
     </div>
 
-    <!-- Quick info -->
-    <div style="background: #f5f2e0; border-radius: 28px; padding: 20px 24px; border: 2px solid #d4b87a; margin: 16px 0;">
-      <div style="display: flex; flex-wrap: wrap; gap: 16px 32px;">
-        <div><i class="fas fa-location-dot" style="color:#b8944c; width:24px;"></i> <span class="i18n" data-en="Damak-05, Traffic Chowk, Near Gorkha Department, Jhapa, Nepal" data-np="दमक-०५, ट्राफिक चोक, गोर्खा विभाग नजिक, झापा, नेपाल">Damak-05, Traffic Chowk, Near Gorkha Department, Jhapa, Nepal</span></div>
-        <div><i class="fas fa-phone" style="color:#b8944c; width:24px;"></i> <a href="tel:9852630088" style="color:#1e3a2b; text-decoration:none;">+977 985-2630088</a> · <a href="tel:023591588" style="color:#1e3a2b; text-decoration:none;">023-591588</a></div>
-        <div><i class="fas fa-clock" style="color:#b8944c; width:24px;"></i> <span class="i18n" data-en="Mon–Sun: 7:30 AM – 9:30 PM" data-np="सोम–आइत: बिहान ७:३० – राति ९:३०">Mon–Sun: 7:30 AM – 9:30 PM</span></div>
-      </div>
-    </div>
-  </section>
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // ── bilingual ──
+        let currentLang = 'en';
 
-  <!-- ===== CONTACT (simplified) ===== -->
-  <section id="contact" style="margin: 32px 0 16px;">
-    <div class="section-title"><i class="fas fa-headset"></i> <span class="i18n" data-en="Contact &amp; Hours" data-np="सम्पर्क र समय">Contact &amp; Hours</span></div>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 16px;">
-      <div style="background:white; border-radius:20px; padding:20px; border:1px solid #d4b87a;"><i class="fas fa-phone-alt" style="color:#b8944c; font-size:1.6rem;"></i><h3 style="margin:8px 0 4px;" class="i18n" data-en="Call us" data-np="फोन गर्नुहोस्">Call us</h3><p>985-2630088 · 023-591588</p></div>
-      <div style="background:white; border-radius:20px; padding:20px; border:1px solid #d4b87a;"><i class="fas fa-envelope" style="color:#b8944c; font-size:1.6rem;"></i><h3 style="margin:8px 0 4px;" class="i18n" data-en="Email" data-np="इमेल">Email</h3><p>bellacafedamak5@gmail.com</p></div>
-      <div style="background:white; border-radius:20px; padding:20px; border:1px solid #d4b87a;"><i class="fab fa-whatsapp" style="color:#b8944c; font-size:1.6rem;"></i><h3 style="margin:8px 0 4px;">WhatsApp</h3><p><a href="https://wa.me/9779852630088" target="_blank" style="color:#1e3a2b; font-weight:600;">+977 985-2630088</a></p></div>
-    </div>
-  </section>
-</div>
+        function setLang(lang) {
+            currentLang = lang;
+            document.getElementById('langEN').classList.toggle('active', lang === 'en');
+            document.getElementById('langNP').classList.toggle('active', lang === 'np');
+            document.querySelectorAll('.i18n').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text !== null) el.innerHTML = text;
+            });
+        }
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div>
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231e3a2b'/%3E%3Ctext x='50' y='72' font-family='Playfair Display,serif' font-size='48' text-anchor='middle' fill='%23d4b87a' font-weight='700'%3EB%3C/text%3E%3C/svg%3E" alt="B" style="height:34px;">
-        <span style="font-family:'Playfair Display',serif; font-size:1.4rem; color:#f5f2e0;">Bella <span style="font-weight:400; color:#d4b87a;">Cafe</span></span>
-      </div>
-      <p style="max-width:340px; opacity:0.8; font-size:0.9rem;" class="i18n" data-en="Damak-05, Traffic Chowk · Near Gorkha Department · Nepal" data-np="दमक-०५, ट्राफिक चोक · गोर्खा विभाग नजिक · नेपाल">Damak-05, Traffic Chowk · Near Gorkha Department · Nepal</p>
-      <div style="display:flex; gap:14px; margin-top:10px; font-size:1.2rem;">
-        <a href="#" style="color:#d4b87a;"><i class="fab fa-facebook"></i></a>
-        <a href="#" style="color:#d4b87a;"><i class="fab fa-instagram"></i></a>
-        <a href="#" style="color:#d4b87a;"><i class="fab fa-google"></i></a>
-      </div>
-    </div>
-    <div class="footer-copy">
-      <p>© 2026 Bella Cafe & Restaurant</p>
-      <p style="font-size:0.8rem; margin-top:4px;" class="i18n" data-en="good food · good times" data-np="राम्रो खाना · राम्रो समय">good food · good times</p>
-    </div>
-  </div>
-</footer>
+        // ── generic slider ──
+        function createSlider(trackId, dotsId, prevId, nextId, auto = true) {
+            const track = document.getElementById(trackId);
+            const slides = track.querySelectorAll('.slider-slide');
+            const dotsContainer = document.getElementById(dotsId);
+            let current = 0,
+                total = slides.length,
+                interval = null;
+            if (!track || !dotsContainer || total === 0) return;
 
-<!-- ===== BOOK NOW FLOATING BUTTON ===== -->
-<a href="tel:9852630088" class="book-now-float" id="bookNowBtn">
-  <i class="fas fa-calendar-check"></i>
-  <span class="i18n" data-en="Book Now" data-np="अहिले बुक गर्नुहोस्">Book Now</span>
-</a>
+            // Create dots
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < total; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+                dot.dataset.index = i;
+                dot.addEventListener('click', () => goTo(i));
+                dotsContainer.appendChild(dot);
+            }
 
-<!-- FLOATING WHATSAPP & PHONE (right) -->
-<div class="float-buttons">
-  <a href="https://wa.me/9779852630088?text=Hello%20Bella%20Cafe%2C%20I'd%20like%20to%20know%20more%20about%20your%20menu%20and%20offers." target="_blank" rel="noopener" class="float-btn whatsapp">
-    <i class="fab fa-whatsapp"></i>
-    <span class="label">WhatsApp</span>
-  </a>
-  <a href="tel:9852630088" class="float-btn phone">
-    <i class="fas fa-phone-alt"></i>
-    <span class="label">Call</span>
-  </a>
-</div>
+            function goTo(index) {
+                current = (index + total) % total;
+                track.style.transform = 'translateX(-' + (current * 100) + '%)';
+                dotsContainer.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+                resetAuto();
+            }
 
-<script>
-  // ----- BILINGUAL -----
-  let currentLang = 'en';
-  function setLang(lang) {
-    currentLang = lang;
-    document.getElementById('langEN').classList.toggle('active', lang === 'en');
-    document.getElementById('langNP').classList.toggle('active', lang === 'np');
-    document.querySelectorAll('.i18n').forEach(el => {
-      const text = el.getAttribute('data-' + lang);
-      if (text !== null) el.innerHTML = text;
-    });
-  }
+            function next() { goTo(current + 1); }
 
-  // ----- HERO SLIDER -----
-  function createSlider(trackId, dotsId, prevId, nextId, auto = true) {
-    const track = document.getElementById(trackId);
-    const slides = track.querySelectorAll('.slider-slide');
-    const dotsContainer = document.getElementById(dotsId);
-    let current = 0, total = slides.length, interval = null;
-    if (!track || !dotsContainer || total === 0) return;
-    for (let i = 0; i < total; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
-      dot.dataset.index = i;
-      dot.addEventListener('click', () => goTo(i));
-      dotsContainer.appendChild(dot);
-    }
-    function goTo(index) {
-      current = (index + total) % total;
-      track.style.transform = `translateX(-${current * 100}%)`;
-      dotsContainer.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === current));
-      resetAuto();
-    }
-    function next() { goTo(current + 1); }
-    function prev() { goTo(current - 1); }
-    function resetAuto() { if (interval) clearInterval(interval); if (auto) interval = setInterval(next, 4000); }
-    document.getElementById(prevId).addEventListener('click', prev);
-    document.getElementById(nextId).addEventListener('click', next);
-    resetAuto();
-    return { goTo, next, prev };
-  }
-  createSlider('heroTrack', 'heroDots', 'heroPrev', 'heroNext', true);
+            function prev() { goTo(current - 1); }
 
-  // ----- REVIEW SLIDER -----
-  function createReviewSlider(trackId, dotsId, prevId, nextId) {
-    const track = document.getElementById(trackId);
-    const slides = track.querySelectorAll('.review-card');
-    const dotsContainer = document.getElementById(dotsId);
-    let current = 0, total = slides.length;
-    if (!track || !dotsContainer || total === 0) return;
-    // determine items per view
-    let perView = window.innerWidth <= 768 ? 1 : 3;
-    const totalDots = Math.ceil(total / perView);
+            function resetAuto() { if (interval) clearInterval(interval); if (auto) interval = setInterval(next, 4000); }
 
-    function buildDots() {
-      dotsContainer.innerHTML = '';
-      for (let i = 0; i < totalDots; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'review-dot' + (i === 0 ? ' active' : '');
-        dot.dataset.index = i;
-        dot.addEventListener('click', () => goTo(i));
-        dotsContainer.appendChild(dot);
-      }
-    }
-    function goTo(index) {
-      current = Math.min(Math.max(0, index), totalDots - 1);
-      const cardWidth = slides[0].offsetWidth + 20; // margin included
-      track.style.transform = `translateX(-${current * perView * (cardWidth)}px)`;
-      dotsContainer.querySelectorAll('.review-dot').forEach((d, i) => d.classList.toggle('active', i === current));
-    }
-    function next() { goTo(current + 1); }
-    function prev() { goTo(current - 1); }
+            document.getElementById(prevId).addEventListener('click', prev);
+            document.getElementById(nextId).addEventListener('click', next);
+            resetAuto();
+            return { goTo, next, prev };
+        }
 
-    document.getElementById(prevId).addEventListener('click', prev);
-    document.getElementById(nextId).addEventListener('click', next);
-    buildDots();
-    // recalc on resize
-    window.addEventListener('resize', () => {
-      perView = window.innerWidth <= 768 ? 1 : 3;
-      // rebuild dots and reset
-      buildDots();
-      goTo(0);
-    });
-    setTimeout(() => goTo(0), 100);
-    return { goTo, next, prev };
-  }
-  createReviewSlider('reviewTrack', 'reviewDots', 'reviewPrev', 'reviewNext');
+        // ── init sliders ──
+        createSlider('heroTrack', 'heroDots', 'heroPrev', 'heroNext', true);
+        createSlider('aboutTrack', 'aboutDots', 'aboutPrev', 'aboutNext', true);
 
-  // ----- MOBILE MENU -----
-  document.getElementById('menuToggle').addEventListener('click', function() {
-    document.getElementById('navLinks').classList.toggle('open');
-  });
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('navLinks').classList.remove('open');
-    });
-  });
-</script>
+        // ── review slider ──
+        function createReviewSlider(trackId, dotsId, prevId, nextId) {
+            const track = document.getElementById(trackId);
+            const slides = track.querySelectorAll('.review-card');
+            const dotsContainer = document.getElementById(dotsId);
+            let current = 0,
+                total = slides.length;
+            if (!track || !dotsContainer || total === 0) return;
+            let perView = window.innerWidth <= 768 ? 1 : 3;
+            const totalDots = Math.ceil(total / perView);
+
+            function buildDots() {
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < totalDots; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'review-dot' + (i === 0 ? ' active' : '');
+                    dot.dataset.index = i;
+                    dot.addEventListener('click', () => goTo(i));
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            function goTo(index) {
+                current = Math.min(Math.max(0, index), totalDots - 1);
+                const cardWidth = slides[0].offsetWidth + 20;
+                track.style.transform = 'translateX(-' + (current * perView * cardWidth) + 'px)';
+                dotsContainer.querySelectorAll('.review-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+            }
+
+            function next() { goTo(current + 1); }
+
+            function prev() { goTo(current - 1); }
+            document.getElementById(prevId).addEventListener('click', prev);
+            document.getElementById(nextId).addEventListener('click', next);
+            buildDots();
+            window.addEventListener('resize', () => {
+                perView = window.innerWidth <= 768 ? 1 : 3;
+                buildDots();
+                goTo(0);
+            });
+            setTimeout(() => goTo(0), 100);
+            return { goTo, next, prev };
+        }
+        createReviewSlider('reviewTrack', 'reviewDots', 'reviewPrev', 'reviewNext');
+
+        // ── mobile menu ──
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('open');
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+        });
+
+        // ── gallery lightbox ──
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const closeLightbox = document.getElementById('closeLightbox');
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                const imgSrc = this.dataset.img;
+                const caption = this.dataset.caption || 'Bella Cafe';
+                lightboxImg.src = imgSrc;
+                lightboxCaption.textContent = caption;
+                lightbox.classList.add('open');
+            });
+        });
+
+        function closeLightboxFn() {
+            lightbox.classList.remove('open');
+        }
+        closeLightbox.addEventListener('click', closeLightboxFn);
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === this) closeLightboxFn();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightboxFn();
+        });
+    </script>
 
 </body>
 </html>
