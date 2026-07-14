@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bella Cafe · Rooms & Booking</title>
+    <title>Bella Cafe · Motion Flow</title>
     <!-- Google Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet" />
@@ -28,6 +28,10 @@
             --text-soft: #3e5a3f;
             --shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
             --shadow-glow: 0 0 40px rgba(184, 148, 76, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -1630,7 +1634,7 @@
             transform: translateY(0) rotateX(0);
         }
 
-        /* ── floating decor ── */
+        /* ── floating decor with parallax ── */
         .floating-decor {
             position: absolute;
             pointer-events: none;
@@ -1638,6 +1642,7 @@
             font-size: 12rem;
             color: var(--primary);
             z-index: 0;
+            will-change: transform;
         }
         .floating-decor.d1 {
             top: -60px;
@@ -1660,6 +1665,39 @@
             66% {
                 transform: translate(-10px, 20px) rotate(-3deg) scale(0.95);
             }
+        }
+
+        /* ── motion flow extras ── */
+        .flow-gradient {
+            background: linear-gradient(270deg, var(--cream), #f0ede4, var(--cream));
+            background-size: 200% 200%;
+            animation: flowGradient 12s ease-in-out infinite;
+        }
+        @keyframes flowGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* smooth scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--cream);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-dark);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold);
         }
     </style>
 </head>
@@ -1699,9 +1737,9 @@
     </nav>
 
     <!-- ===== HERO ===== -->
-    <section id="home" class="hero">
-        <div class="floating-decor d1">☕</div>
-        <div class="floating-decor d2">🍽️</div>
+    <section id="home" class="hero flow-gradient">
+        <div class="floating-decor d1" id="decor1">☕</div>
+        <div class="floating-decor d2" id="decor2">🍽️</div>
         <div class="container hero-grid">
             <div class="hero-content">
                 <h1>Bella <i>Cafe</i> <span class="i18n" data-en="&amp; Restaurant" data-np="र रेस्टुरेन्ट">&amp; Restaurant</span></h1>
@@ -1878,13 +1916,12 @@
             </div>
         </section>
 
-        <!-- ===== ROOMS & SUITES (NEW) ===== -->
+        <!-- ===== ROOMS & SUITES ===== -->
         <section id="rooms" class="rooms-section">
             <div class="section-title reveal"><i class="fas fa-bed"></i> <span class="i18n" data-en="Rooms &amp; Suites" data-np="कोठा र सुइटहरू">Rooms &amp; Suites</span></div>
             <p class="section-sub reveal i18n" data-en="Comfortable stays with modern amenities. Perfect for your getaway." data-np="आधुनिक सुविधाहरू सहित आरामदायक बसाइ। तपाईंको यात्राको लागि उपयुक्त।">Comfortable stays with modern amenities. Perfect for your getaway.</p>
 
             <div class="rooms-grid">
-                <!-- Room 1: Standard Room -->
                 <div class="room-card reveal">
                     <div class="room-image">
                         <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop&crop=center" alt="Standard Room" loading="lazy" onerror="this.src='https://picsum.photos/seed/standard/600/400';" />
@@ -1907,7 +1944,6 @@
                     </div>
                 </div>
 
-                <!-- Room 2: Deluxe Room -->
                 <div class="room-card reveal">
                     <div class="room-image">
                         <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=600&h=400&fit=crop&crop=center" alt="Deluxe Room" loading="lazy" onerror="this.src='https://picsum.photos/seed/deluxe/600/400';" />
@@ -1931,7 +1967,6 @@
                     </div>
                 </div>
 
-                <!-- Room 3: Suite -->
                 <div class="room-card reveal">
                     <div class="room-image">
                         <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&h=400&fit=crop&crop=center" alt="Suite" loading="lazy" onerror="this.src='https://picsum.photos/seed/suite/600/400';" />
@@ -2242,11 +2277,15 @@
             if (e.key === 'Escape') closeLightboxFn();
         });
 
-        // ── scroll reveal ──
+        // ── scroll reveal with staggered delays ──
         const revealElements = document.querySelectorAll('.reveal');
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    // Add a staggered delay based on index
+                    const index = Array.from(revealElements).indexOf(entry.target);
+                    const delay = Math.min(index * 0.08, 0.8);
+                    entry.target.style.transitionDelay = delay + 's';
                     entry.target.classList.add('visible');
                 }
             });
@@ -2268,6 +2307,19 @@
             });
         });
 
+        // ── parallax for floating decor ──
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const decor1 = document.getElementById('decor1');
+            const decor2 = document.getElementById('decor2');
+            if (decor1) {
+                decor1.style.transform = `translateY(${scrolled * 0.1}px) rotate(${scrolled * 0.02}deg)`;
+            }
+            if (decor2) {
+                decor2.style.transform = `translateY(${-scrolled * 0.08}px) rotate(${-scrolled * 0.02}deg)`;
+            }
+        });
+
         // ── smooth anchor scroll ──
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -2281,7 +2333,7 @@
             });
         });
 
-        console.log('☕ Bella Cafe · 3D Experience with Rooms Loaded');
+        console.log('☕ Bella Cafe · Motion Flow Experience Loaded');
     </script>
 
 </body>
